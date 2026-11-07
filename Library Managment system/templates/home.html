@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>University Library System</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">📚</div>
+
+        <h1>CINEC Library</h1>
+
+        <p class="subtitle">
+            Overdue Fine Management System
+        </p>
+
+        <form action="{{ url_for('calculate') }}"
+              method="POST">
+
+            <label>Student Name</label>
+            <input
+                type="text"
+                name="name"
+                placeholder="Enter student name"
+                maxlength="100"
+                required
+            >
+
+            <label>Student Email</label>
+            <input
+                type="email"
+                name="email"
+                placeholder="Enter student email"
+                required
+            >
+
+            <label>Book Name</label>
+            <input
+                type="text"
+                name="book"
+                placeholder="Enter book name"
+                maxlength="150"
+                required
+            >
+
+            <label>Overdue Days</label>
+            <input
+                type="number"
+                name="days"
+                min="0"
+                max="100000"
+                step="1"
+                placeholder="Enter overdue days"
+                required
+            >
+
+            <button type="submit">
+                Calculate Fine 
+            </button>
+
+        </form>
+
+        <a href="{{ url_for('records') }}"
+           class="glass-link">
+            View Saved Records
+        </a>
+
+        <p class="footer">
+            
+            Library Management System
+        </p>
+
+    </div>
+
+</body>
+</html>

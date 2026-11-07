@@ -1,0 +1,99 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Fine Calculation Result</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="container">
+
+        <div class="logo">📖</div>
+
+        <h1>Fine Calculation Result</h1>
+
+        <p class="subtitle">
+            Library Borrower Information
+        </p>
+
+        <div class="result-box">
+
+            <p><b>Record ID:</b> {{ record_id }}</p>
+
+            <p><b>Student:</b> {{ name }}</p>
+
+            <p><b>Email:</b> {{ email }}</p>
+
+            <p><b>Book:</b> {{ book }}</p>
+
+            <p><b>Overdue Days:</b> {{ days }}</p>
+
+            <hr>
+
+            <p>
+                <b>Calculated Fine:</b>
+                ${{ "%.2f"|format(raw) }}
+            </p>
+
+            <h2>
+                Final Fine: ${{ "%.2f"|format(fine) }}
+            </h2>
+
+            <p>
+                <b>Account Status:</b>
+                <span class="status
+                    {% if status == 'Suspended' %}danger
+                    {% elif status == 'Warning' %}warning
+                    {% elif status == 'Penalty' %}warning
+                    {% else %}success{% endif %}">
+                    {{ status }}
+                </span>
+            </p>
+
+            <p>
+                <b>Membership:</b>
+                {{ membership }}
+            </p>
+
+        </div>
+
+        {% if email_text %}
+
+        <div class="email-box">
+
+            <h3>Membership Cancellation Email</h3>
+
+            <p class="email-note">
+                Email generated successfully.
+                This is a preview, not an email sent.
+            </p>
+
+            <pre>{{ email_text }}</pre>
+
+        </div>
+
+        {% endif %}
+
+        <a href="{{ url_for('home') }}"
+           class="glass-link">
+            Calculate Another Fine
+        </a>
+
+        <a href="{{ url_for('records') }}"
+           class="glass-link">
+            View Database Records
+        </a>
+
+    </div>
+
+</body>
+</html>

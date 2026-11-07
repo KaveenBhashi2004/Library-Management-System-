@@ -1,0 +1,106 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Library Database Records</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="dashboard">
+
+        <div class="logo">🗄️</div>
+
+        <h1>Library Records Dashboard</h1>
+
+        <p class="subtitle">
+            Student Fine Management Database
+        </p>
+
+        <div class="dashboard-header">
+
+            <h3>
+                Total Records: {{ records|length }}
+            </h3>
+
+            <a href="{{ url_for('home') }}"
+               class="glass-link small-link">
+                + New Calculation
+            </a>
+
+        </div>
+
+        <div class="table-wrapper">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Student</th>
+                        <th>Email</th>
+                        <th>Book</th>
+                        <th>Days</th>
+                        <th>Fine</th>
+                        <th>Status</th>
+                        <th>Membership</th>
+                        <th>Date</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for record in records %}
+
+                    <tr>
+
+                        <td>{{ record["id"] }}</td>
+
+                        <td>{{ record["student_name"] }}</td>
+
+                        <td>{{ record["email"] }}</td>
+
+                        <td>{{ record["book_name"] }}</td>
+
+                        <td>{{ record["overdue_days"] }}</td>
+
+                        <td>
+                            ${{ "%.2f"|format(record["fine"]) }}
+                        </td>
+
+                        <td>{{ record["status"] }}</td>
+
+                        <td>{{ record["membership"] }}</td>
+
+                        <td>{{ record["created_at"] }}</td>
+
+                    </tr>
+
+                    {% else %}
+
+                    <tr>
+                        <td colspan="9">
+                            No saved records available.
+                        </td>
+                    </tr>
+
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
